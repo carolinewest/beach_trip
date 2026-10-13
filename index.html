@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Beach Trip Planner - Wrightsville, Carolina & Myrtle Beach</title>
+    <!-- Tailwind CSS for modern responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(180deg, #E0F2FE 0%, #F0F9FF 30%, #FEF3C7 100%);
+            min-height: 100vh;
+        }
+        h1, h2, h3, .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+        button, div[role="button"] {
+            -webkit-tap-highlight-color: transparent;
+        }
+        @keyframes pulse-subtle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.01); }
+        }
+        .pulse-subtle {
+            animation: pulse-subtle 4s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="text-slate-800 pb-24">
+
+    <header class="bg-teal-700 text-white shadow-xl sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="flex items-center gap-3 text-center sm:text-left">
+                <span class="text-4xl" role="img" aria-label="wave">🌊</span>
+                <div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold tracking-wide">Family Beach Trip Planner</h1>
+                    <p class="text-teal-100 text-sm sm:text-base font-medium">Summer Getaway • Under 5 Hours From Charlotte</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="shareLink()" class="bg-teal-600 hover:bg-teal-800 text-white px-4 py-2.5 rounded-xl text-sm font-bold border border-teal-500 transition shadow-sm active:scale-95 flex items-center gap-1.5">
+                    <span>🔗</span> Share Link
+                </button>
+                <button onclick="confirmReset()" class="bg-teal-900/60 hover:bg-teal-900 text-teal-100 px-4 py-2.5 rounded-xl text-sm font-semibold border border-teal-600 transition shadow-sm active:scale-95 flex items-center gap-1.5">
+                    <span>🔄</span> Reset
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 pt-6 space-y-8">
+
+        <section class="bg-amber-50 border-3 border-amber-300 rounded-3xl p-6 shadow-md flex items-start gap-4 pulse-subtle">
+            <div class="text-4xl shrink-0">💡</div>
+            <div class="space-y-1">
+                <h2 class="text-xl sm:text-2xl font-bold text-amber-900">Welcome Family! (Super Easy to Use)</h2>
+                <p class="text-amber-800 text-base sm:text-lg leading-relaxed">
+                    Mom & everyone: Just tap the big green <strong>"👍 YES! LOVE IT"</strong> or red <strong>"👎 NOT FOR ME"</strong> buttons on the options below. Your votes save automatically so we can pick our favorite beach house & spot together!
+                </p>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border-2 border-teal-100 space-y-4">
+            <div class="flex items-center gap-3 pb-3 border-b-2 border-teal-50">
+                <span class="text-4xl">💰</span>
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-teal-600 bg-teal-50 px-2.5 py-1 rounded-md">Smart Planning Guide</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Best Timing for Lower Rates & Warm Swimming</h2>
+                </div>
+            </div>
+            <p class="text-slate-700 text-base sm:text-lg leading-relaxed">
+                To secure significantly lower rental prices while ensuring ocean water is wonderfully warm for swimming (low-to-mid 80s), target these two prime windows:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                <div class="bg-sky-50 rounded-2xl p-5 border border-sky-200">
+                    <h3 class="text-lg font-bold text-sky-900">Option 1: Early-to-Mid June</h3>
+                    <p class="text-slate-700 mt-1">Right before peak summer school-out spikes in late June/July. Weather is gorgeous, ocean is warming up nicely, and rental rates are 20-30% lower than peak July.</p>
+                </div>
+                <div class="bg-amber-50 rounded-2xl p-5 border border-amber-200">
+                    <h3 class="text-lg font-bold text-amber-900">Option 2: Post-Labor Day to Mid-September</h3>
+                    <p class="text-slate-700 mt-1">The ocean remains at its absolute warmest summer temperatures after months of sun, crowds disappear, beaches are wide open, and rental rates drop drastically.</p>
+                </div>
+            </div>
+        </section>
+
+        <nav class="flex flex-wrap gap-2 justify-center" aria-label="Destination Tabs">
+            <button onclick="switchTab('all')" id="tab-all" class="tab-btn bg-teal-700 text-white px-5 py-3 rounded-2xl text-lg font-bold shadow-md transition transform active:scale-95">
+                🌟 All Destinations
+            </button>
+            <button onclick="switchTab('wrightsville')" id="tab-wrightsville" class="tab-btn bg-white text-slate-700 hover:bg-teal-50 px-5 py-3 rounded-2xl text-lg font-bold shadow-md transition transform active:scale-95">
+                📍 1. Wrightsville Beach, NC
+            </button>
+            <button onclick="switchTab('carolina')" id="tab-carolina" class="tab-btn bg-white text-slate-700 hover:bg-teal-50 px-5 py-3 rounded-2xl text-lg font-bold shadow-md transition transform active:scale-95">
+                📍 2. Carolina Beach, NC
+            </button>
+            <button onclick="switchTab('myrtle')" id="tab-myrtle" class="tab-btn bg-white text-slate-700 hover:bg-teal-50 px-5 py-3 rounded-2xl text-lg font-bold shadow-md transition transform active:scale-95">
+                📍 3. Myrtle Beach, SC
+            </button>
+            <button onclick="switchTab('itineraries')" id="tab-itineraries" class="tab-btn bg-white text-slate-700 hover:bg-teal-50 px-5 py-3 rounded-2xl text-lg font-bold shadow-md transition transform active:scale-95">
+                ☕ Itineraries & Food
+            </button>
+        </nav>
+
+        <section id="section-wrightsville" class="destination-card bg-white rounded-3xl p-6 sm:p-8 shadow-xl border-2 border-teal-100 space-y-6">
+            <div class="flex items-center gap-3 pb-3 border-b-2 border-teal-50">
+                <span class="text-4xl">🏖️</span>
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-teal-600 bg-teal-50 px-2.5 py-1 rounded-md">Destination 1</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Wrightsville Beach, NC</h2>
+                    <p class="text-slate-600 font-medium">~3h 45m from Charlotte • Upscale, highly walkable island, pristine turquoise water.</p>
+                </div>
+            </div>
+
+            <!-- Rentals -->
+            <div class="space-y-4">
+                <h3 class="text-xl font-bold text-teal-900">🏡 4+ Bedroom Rental Options (Walk to Beach)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-teal-50/60 rounded-2xl p-4 border border-teal-100 flex flex-col justify-between">
+                        <div>
+                            <span class="bg-teal-200 text-teal-900 text-xs font-bold px-2.5 py-1 rounded-md">Option A</span>
+                            <h4 class="font-bold text-lg text-slate-900 mt-2">The Coastal Modern Retreat</h4>
+                            <p class="text-sm text-slate-700 mt-1">4 BR, 3 Bath (Sleeps 10). 3-min walk to beach access. Private fenced patio, outdoor hot water shower, fully equipped GF-safe modern kitchen.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-teal-200 text-xs font-semibold text-teal-800">Est. June/Sept: ~$2,900 / 4-5 days</div>
+                    </div>
+                    <div class="bg-teal-50/60 rounded-2xl p-4 border border-teal-100 flex flex-col justify-between">
+                        <div>
+                            <span class="bg-teal-200 text-teal-900 text-xs font-bold px-2.5 py-1 rounded-md">Option B</span>
+                            <h4 class="font-bold text-lg text-slate-900 mt-2">Oceanfront Dune House</h4>
+                            <p class="text-sm text-slate-700 mt-1">5 BR, 4 Bath (Sleeps 12). 1-min walk over dune path. Features an <strong>elevator</strong> (great for Mom!), wrap-around porch with ocean views.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-teal-200 text-xs font-semibold text-teal-800">Est. June/Sept: ~$3,700 / 4-5 days</div>
+                    </div>
+                    <div class="bg-teal-50/60 rounded-2xl p-4 border border-teal-100 flex flex-col justify-between">
+                        <div>
+                            <span class="bg-teal-200 text-teal-900 text-xs font-bold px-2.5 py-1 rounded-md">Option C</span>
+                            <h4 class="font-bold text-lg text-slate-900 mt-2">Soundside Family Haven</h4>
+                            <p class="text-sm text-slate-700 mt-1">4 BR, 3.5 Bath (Sleeps 10). 4-min walk to beach. Large open living space, paddleboards included, quiet family-friendly neighborhood.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-teal-200 text-xs font-semibold text-teal-800">Est. June/Sept: ~$2,600 / 4-5 days</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Voting Box -->
+            <div id="voting-wrightsville" class="bg-slate-50 p-5 rounded-2xl border-2 border-slate-200 space-y-4">
+                <p class="text-center font-bold text-lg text-slate-800">What does the family think of Wrightsville Beach?</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <button onclick="castVote('wrightsville', 'like')" id="btn-wrightsville-like" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xl py-4 px-6 rounded-2xl shadow-lg transform transition active:scale-95 flex items-center justify-center gap-3">
+                        <span class="text-3xl">👍</span> YES! LOVE IT
+                    </button>
+                    <button onclick="castVote('wrightsville', 'dislike')" id="btn-wrightsville-dislike" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-extrabold text-xl py-4 px-6 rounded-2xl shadow-lg transform transition active:scale-95 flex items-center justify-center gap-3">
+                        <span class="text-3xl">👎</span> NOT FOR ME
+                    </button>
+                </div>
+                <div class="flex gap-2 pt-1">
+                    <input type="text" id="notes-wrightsville" placeholder="Add a note (e.g., Mom loves the elevator house!)" class="w-full p-3 border-2 border-slate-300 rounded-xl text-base">
+                    <button onclick="saveNote('wrightsville')" class="bg-teal-700 hover:bg-teal-800 text-white px-5 rounded-xl font-bold transition">Save</button>
+                </div>
+                <div id="status-wrightsville" class="hidden text-center p-3 rounded-xl font-bold text-lg"></div>
+            </div>
+        </section>
+
+        <section id="section-carolina" class="destination-card bg-white rounded-3xl p-6 sm:p-8 shadow-xl border-2 border-teal-100 space-y-6">
+            <div class="flex items-center gap-3 pb-3 border-b-2 border-teal-50">
+                <span class="text-4xl">🎡</span>
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-teal-600 bg-teal-50 px-2.5 py-1 rounded-md">Destination 2</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Carolina Beach, NC</h2>
+                    <p class="text-slate-600 font-medium">~3h 45m from Charlotte • Boardwalk charm, family-friendly rides, lake park strolls.</p>
+                </div>
+            </div>
+
+            <!-- Rentals -->
+            <div class="space-y-4">
+                <h3 class="text-xl font-bold text-teal-900">🏡 4+ Bedroom Rental Options (Walk to Beach)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-amber-50/60 rounded-2xl p-4 border border-amber-100 flex flex-col justify-between">
+                        <div>
+                            <span class="bg-amber-200 text-amber-900 text-xs font-bold px-2.5 py-1 rounded-md">Option A</span>
+                            <h4 class="font-bold text-lg text-slate-900 mt-2">Seagaze Coastal Retreat</h4>
+                            <p class="text-sm text-slate-700 mt-1">4 BR, 3 Bath (Sleeps 10). 3-min walk to sand, 5-min walk to Carolina Beach Lake Park. Modern kitchen for safe GF cooking.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-amber-200 text-xs font-semibold text-amber-900">Est. June/Sept: ~$2,700 / 4-5 days</div>
+                    </div>
+                    <div class="bg-amber-50/60 rounded-2xl p-4 border border-amber-100 flex flex-col justify-between">
+                        <div>
+                            <span class="bg-amber-200 text-amber-900 text-xs font-bold px-2.5 py-1 rounded-md">Option B</span>
+                            <h4 class="font-bold text-lg text-slate-900 mt-2">Shore Thing Y'all</h4>
+                            <p class="text-sm text-slate-700 mt-1">4 BR, 3.5 Bath (Sleeps 11). 1 block walk to beach access. Bright open layout, water views, private parking for 4 cars.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-amber-200 text-xs font-semibold text-amber-900">Est. June/Sept: ~$3,100 / 4-5 days</div>
+                    </div>
+                    <div class="bg-amber-50/60 rounded-2xl p-4 border border-amber-100 flex flex-col justify-between">
+                        <div>
+                            <span class="bg-amber-200 text-amber-900 text-xs font-bold px-2.5 py-1 rounded-md">Option C</span>
+                            <h4 class="font-bold text-lg text-slate-900 mt-2">Ocean Breeze Luxury Home</h4>
+                            <p class="text-sm text-slate-700 mt-1">4 BR, 4.5 Bath (Sleeps 12). Direct private beach access / oceanfront. Elevator, multiple private sun decks.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-amber-200 text-xs font-semibold text-amber-900">Est. June/Sept: ~$4,000 / 4-5 days</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Voting Box -->
+            <div id="voting-carolina" class="bg-slate-50 p-5 rounded-2xl border-2 border-slate-200 space-y-4">
+                <p class="text-center font-bold text-lg text-slate-800">What does the family think of Carolina Beach?</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <button onclick="castVote('carolina', 'like')" id="btn-carolina-like" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xl py-4 px-6 rounded-2xl shadow-lg transform transition active:scale-95 flex items-center justify-center gap-3">
+                        <span class="text-3xl">👍</span> YES! LOVE IT
+                    </button>
+                    <button onclick="castVote('carolina', 'dislike')" id="btn-carolina-dislike" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-extrabold text-xl py-4 px-6 rounded-2xl shadow-lg transform transition active:scale-95 flex items-center justify-center gap-3">
+                        <span class="text-3xl">👎</span> NOT FOR ME
+                    </button>
+                </div>
+                <div class="flex gap-2 pt-1">
+                    <input type="text" id="notes-carolina" placeholder="Add a note (e.g., Kids will love the boardwalk!)" class="w-full p-3 border-2 border-slate-300 rounded-xl text-base">
+                    <button onclick="saveNote('carolina')" class="bg-teal-700 hover:bg-teal-800 text-white px-5 rounded-xl font-bold transition">Save</button>
+                </div>
+                <div id="status-carolina" class="hidden text-center p-3 rounded-xl font-bold text-lg"></div>
+            </div>
+        </section>
+
+        <section id="section-myrtle" class="destination-card bg-white rounded-3xl p-6 sm:p-8 shadow-xl border-2 border-teal-100 space-y-6">
+            <div class="flex items-center gap-3 pb-3 border-b-2 border-teal-50">
+                <span class="text-4xl">🌴</span>
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-teal-600 bg-teal-50 px-2.5 py-1 rounded-md">Destination 3</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Myrtle Beach, SC (North End)</h2>
+                    <p class="text-slate-600 font-medium">~3h 30m from Charlotte • Closest drive, wide sandy beaches, endless resort activities for kids.</p>
+                </div>
+            </div>
+
+            <!-- Rentals -->
+            <div class="space-y-4">
+                <h3 class="text-xl font-bold text-teal-900">🏡 4+ Bedroom Rental Options (Walk to Beach)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-sky-50/60 rounded-2xl p-4 border border-sky-100 flex flex-col justify-between">
+                        <div>
+                            <span class="bg-sky-200 text-sky-900 text-xs font-bold px-2.5 py-1 rounded-md">Option A</span>
+                            <h4 class="font-bold text-lg text-slate-900 mt-2">Beach Colony Oceanfront Condo</h4>
+                            <p class="text-sm text-slate-700 mt-1">4 BR, 3 Bath (Sleeps 10). Direct oceanfront access. On-site pools, lazy river, fully equipped kitchen.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-sky-200 text-xs font-semibold text-sky-900">Est. June/Sept: ~$2,800 / 4-5 days</div>
+                    </div>
+                    <div class="bg-sky-50/60 rounded-2xl p-4 border border-sky-100 flex flex-col justify-between">
+                        <div>
+                            <span class="bg-sky-200 text-sky-900 text-xs font-bold px-2.5 py-1 rounded-md">Option B</span>
+                            <h4 class="font-bold text-lg text-slate-900 mt-2">Caribbean Resort Suite</h4>
+                            <p class="text-sm text-slate-700 mt-1">4 BR, 4 Bath (Sleeps 12). Oceanfront steps to sand. Multiple balconies, indoor/outdoor pools, spacious family layout.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-sky-200 text-xs font-semibold text-sky-900">Est. June/Sept: ~$3,500 / 4-5 days</div>
+                    </div>
+                    <div class="bg-sky-50/60 rounded-2xl p-4 border border-sky-100 flex flex-col justify-between">
+                        <div>
+                            <span class="bg-sky-200 text-sky-900 text-xs font-bold px-2.5 py-1 rounded-md">Option C</span>
+                            <h4 class="font-bold text-lg text-slate-900 mt-2">Spacious Coastal Townhouse</h4>
+                            <p class="text-sm text-slate-700 mt-1">4 BR, 3.5 Bath (Sleeps 10). 5-min walk to beach. Shared pool access, full kitchen, free parking for multiple cars.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-sky-200 text-xs font-semibold text-sky-900">Est. June/Sept: ~$2,400 / 4-5 days</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Voting Box -->
+            <div id="voting-myrtle" class="bg-slate-50 p-5 rounded-2xl border-2 border-slate-200 space-y-4">
+                <p class="text-center font-bold text-lg text-slate-800">What does the family think of Myrtle Beach?</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <button onclick="castVote('myrtle', 'like')" id="btn-myrtle-like" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xl py-4 px-6 rounded-2xl shadow-lg transform transition active:scale-95 flex items-center justify-center gap-3">
+                        <span class="text-3xl">👍</span> YES! LOVE IT
+                    </button>
+                    <button onclick="castVote('myrtle', 'dislike')" id="btn-myrtle-dislike" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-extrabold text-xl py-4 px-6 rounded-2xl shadow-lg transform transition active:scale-95 flex items-center justify-center gap-3">
+                        <span class="text-3xl">👎</span> NOT FOR ME
+                    </button>
+                </div>
+                <div class="flex gap-2 pt-1">
+                    <input type="text" id="notes-myrtle" placeholder="Add a note (e.g., Shortest drive from Charlotte!)" class="w-full p-3 border-2 border-slate-300 rounded-xl text-base">
+                    <button onclick="saveNote('myrtle')" class="bg-teal-700 hover:bg-teal-800 text-white px-5 rounded-xl font-bold transition">Save</button>
+                </div>
+                <div id="status-myrtle" class="hidden text-center p-3 rounded-xl font-bold text-lg"></div>
+            </div>
+        </section>
+
+        <section id="section-itineraries" class="destination-card bg-white rounded-3xl p-6 sm:p-8 shadow-xl border-2 border-teal-100 space-y-8">
+            <div class="flex items-center gap-3 pb-3 border-b-2 border-teal-50">
+                <span class="text-4xl">📋</span>
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-teal-600 bg-teal-50 px-2.5 py-1 rounded-md">Plans & Dining</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Tailored Itineraries & Gluten-Free Dining Guide</h2>
+                    <p class="text-slate-600 font-medium">Safe GF dining with walking distances, reviews, and custom daily schedules for Sister, Mom, and Kids.</p>
+                </div>
+            </div>
+
+            <!-- Gluten-Free Dining Guide -->
+            <div class="space-y-4">
+                <h3 class="text-xl font-bold text-teal-900">🌾 Safe Gluten-Free Dining Guide (Wrightsville / Coastal Area)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-teal-50/50 rounded-2xl p-4 border border-teal-100 space-y-2">
+                        <h4 class="font-bold text-lg text-slate-900">1. Ceviche’s</h4>
+                        <p class="text-xs font-bold text-teal-700">Coastal Pan-Latin / Tapas</p>
+                        <p class="text-sm text-slate-700"><strong>GF Safety:</strong> Outstanding. Naturally GF options, separate fryers, very accommodating. Perfect for Mom's tapas!</p>
+                        <p class="text-xs text-slate-600"><strong>Distance:</strong> ~6 min walk from beach houses.<br><strong>Reviews:</strong> 4.8/5 for vibrant atmosphere & sangria.</p>
+                    </div>
+                    <div class="bg-teal-50/50 rounded-2xl p-4 border border-teal-100 space-y-2">
+                        <h4 class="font-bold text-lg text-slate-900">2. Tower 7 Dalee Mexican Grill</h4>
+                        <p class="text-xs font-bold text-teal-700">Baja-style Mexican Tacos</p>
+                        <p class="text-sm text-slate-700"><strong>GF Safety:</strong> Corn tortillas, chips, and dedicated GF modifications available. Kid-friendly favorite.</p>
+                        <p class="text-xs text-slate-600"><strong>Distance:</strong> ~4 min walk.<br><strong>Reviews:</strong> 4.7/5 for quick service & casual vibe.</p>
+                    </div>
+                    <div class="bg-teal-50/50 rounded-2xl p-4 border border-teal-100 space-y-2">
+                        <h4 class="font-bold text-lg text-slate-900">3. South Beach Grill</h4>
+                        <p class="text-xs font-bold text-teal-700">Upscale Seafood & Coastal Plates</p>
+                        <p class="text-sm text-slate-700"><strong>GF Safety:</strong> Knowledgeable servers, customizable fresh catch and grilled seafood.</p>
+                        <p class="text-xs font-bold text-slate-600"><strong>Distance:</strong> ~6 min walk.<br><strong>Reviews:</strong> 4.9/5 for trendy dining & cocktails.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Itineraries Grid -->
+            <div class="space-y-4 pt-2">
+                <h3 class="text-xl font-bold text-teal-900">🗺️ Tailored Family Itineraries</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-sky-50/60 rounded-2xl p-5 border border-sky-100 space-y-3">
+                        <div class="flex items-center gap-2">
+                            <span class="text-2xl">☕</span>
+                            <h4 class="font-bold text-lg text-sky-900">Sister's Itinerary</h4>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            <strong>Focus:</strong> Trendy food, coffee, & beach time.<br>
+                            <strong>Morning:</strong> Artisanal cold brew and GF toast at <em>Drift Coffee</em> (~5 min walk), followed by morning sunbathing.<br>
+                            <strong>Afternoon:</strong> Boutique shopping near Lumina Station and beach reading.<br>
+                            <strong>Evening:</strong> Trendy dinner at <em>South Beach Grill</em> and sunset cocktails.
+                        </p>
+                    </div>
+                    <div class="bg-amber-50/60 rounded-2xl p-5 border border-amber-100 space-y-3">
+                        <div class="flex items-center gap-2">
+                            <span class="text-2xl">🍷</span>
+                            <h4 class="font-bold text-lg text-amber-900">Mom's Itinerary</h4>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            <strong>Focus:</strong> Relaxed pace, tapas, drinks & local stores.<br>
+                            <strong>Morning:</strong> Leisurely morning on the deck with coffee and gentle beach wave listening.<br>
+                            <strong>Afternoon:</strong> Browsing coastal art galleries and local gift boutiques.<br>
+                            <strong>Evening:</strong> Tapas, tropical sangria, and small plates at <em>Ceviche’s</em> in a comfortable setting.
+                        </p>
+                    </div>
+                    <div class="bg-emerald-50/60 rounded-2xl p-5 border border-emerald-100 space-y-3">
+                        <div class="flex items-center gap-2">
+                            <span class="text-2xl">🏖️</span>
+                            <h4 class="font-bold text-lg text-emerald-900">Kids Itinerary (Ages 4 & 6)</h4>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            <strong>Focus:</strong> Sandcastle building & safe GF eats.<br>
+                            <strong>Morning:</strong> Sandcastle building, splashing in shoreline waves right outside the rental.<br>
+                            <strong>Afternoon:</strong> Playground visit at Wrightsville Beach Park + GF treats.<br>
+                            <strong>Evening:</strong> Early, kid-friendly gluten-free tacos at <em>Tower 7</em>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Itineraries Voting Box -->
+            <div id="voting-itineraries" class="bg-slate-50 p-5 rounded-2xl border-2 border-slate-200 space-y-4">
+                <p class="text-center font-bold text-lg text-slate-800">Do you approve these itineraries & dining plans?</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <button onclick="castVote('itineraries', 'like')" id="btn-itineraries-like" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xl py-4 px-6 rounded-2xl shadow-lg transform transition active:scale-95 flex items-center justify-center gap-3">
+                        <span class="text-3xl">👍</span> YES! LOVE IT
+                    </button>
+                    <button onclick="castVote('itineraries', 'dislike')" id="btn-itineraries-dislike" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-extrabold text-xl py-4 px-6 rounded-2xl shadow-lg transform transition active:scale-95 flex items-center justify-center gap-3">
+                        <span class="text-3xl">👎</span> NOT FOR ME
+                    </button>
+                </div>
+                <div class="flex gap-2 pt-1">
+                    <input type="text" id="notes-itineraries" placeholder="Add a note (e.g., Sounds like a wonderful plan!)" class="w-full p-3 border-2 border-slate-300 rounded-xl text-base">
+                    <button onclick="saveNote('itineraries')" class="bg-teal-700 hover:bg-teal-800 text-white px-5 rounded-xl font-bold transition">Save</button>
+                </div>
+                <div id="status-itineraries" class="hidden text-center p-3 rounded-xl font-bold text-lg"></div>
+            </div>
+        </section>
+
+        <section class="bg-gradient-to-br from-teal-800 to-teal-900 text-white rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+            <div class="flex items-center gap-3 border-b border-teal-700 pb-4">
+                <span class="text-4xl">📊</span>
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold">Family Choice Summary Dashboard</h2>
+                    <p class="text-teal-200">Review all saved family votes and notes in one place.</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="summary-grid">
+                <!-- Javascript injects summary items here -->
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        const categories = ['wrightsville', 'carolina', 'myrtle', 'itineraries'];
+        const categoryTitles = {
+            'wrightsville': '1. Wrightsville Beach, NC',
+            'carolina': '2. Carolina Beach, NC',
+            'myrtle': '3. Myrtle Beach, SC',
+            'itineraries': 'Itineraries & GF Dining'
+        };
+
+        let appData = {
+            votes: {},
+            notes: {}
+        };
+
+        window.onload = function() {
+            loadSavedData();
+            updateUI();
+        };
+
+        function loadSavedData() {
+            try {
+                const saved = localStorage.getItem('family_beach_trip_planner_v2');
+                if (saved) {
+                    appData = JSON.parse(saved);
+                }
+            } catch (e) {
+                console.error('Could not load data:', e);
+            }
+        }
+
+        function saveData() {
+            try {
+                localStorage.setItem('family_beach_trip_planner_v2', JSON.stringify(appData));
+            } catch (e) {
+                console.error('Could not save data:', e);
+            }
+            updateUI();
+        }
+
+        function castVote(category, voteType) {
+            appData.votes[category] = voteType;
+            saveData();
+            playClickSound(voteType === 'like' ? 520 : 320);
+        }
+
+        function saveNote(category) {
+            const inputEl = document.getElementById(`notes-${category}`);
+            if (inputEl && inputEl.value.trim() !== '') {
+                appData.notes[category] = inputEl.value.trim();
+                saveData();
+                inputEl.value = '';
+                playClickSound(600);
+            }
+        }
+
+        function updateUI() {
+            categories.forEach(cat => {
+                const likeBtn = document.getElementById(`btn-${cat}-like`);
+                const dislikeBtn = document.getElementById(`btn-${cat}-dislike`);
+                const statusEl = document.getElementById(`status-${cat}`);
+                const currentVote = appData.votes[cat];
+
+                if(likeBtn && dislikeBtn) {
+                    likeBtn.className = "w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xl py-4 px-6 rounded-2xl shadow-lg transform transition active:scale-95 flex items-center justify-center gap-3";
+                    dislikeBtn.className = "w-full bg-rose-500 hover:bg-rose-600 text-white font-extrabold text-xl py-4 px-6 rounded-2xl shadow-lg transform transition active:scale-95 flex items-center justify-center gap-3";
+
+                    if (currentVote === 'like') {
+                        likeBtn.className += " ring-8 ring-emerald-300 scale-105";
+                        statusEl.classList.remove('hidden');
+                        statusEl.className = "text-center p-3 rounded-xl font-bold text-lg bg-emerald-100 text-emerald-900 border border-emerald-300";
+                        statusEl.innerHTML = "✅ Saved: You Liked This Option!";
+                    } else if (currentVote === 'dislike') {
+                        dislikeBtn.className += " ring-8 ring-rose-300 scale-105";
+                        statusEl.classList.remove('hidden');
+                        statusEl.className = "text-center p-3 rounded-xl font-bold text-lg bg-rose-100 text-rose-900 border border-rose-300";
+                        statusEl.innerHTML = "❌ Saved: You Passed On This Option";
+                    } else {
+                        statusEl.classList.add('hidden');
+                    }
+                }
+            });
+
+            renderSummary();
+        }
+
+        function renderSummary() {
+            const container = document.getElementById('summary-grid');
+            if(!container) return;
+            container.innerHTML = '';
+
+            categories.forEach(cat => {
+                const vote = appData.votes[cat];
+                const note = appData.notes[cat];
+
+                let voteBadge = '<span class="text-amber-300 font-semibold text-sm">Not Voted Yet</span>';
+                if (vote === 'like') {
+                    voteBadge = '<span class="bg-emerald-500 text-white px-3 py-1 rounded-full text-xs font-bold">👍 LIKED</span>';
+                } else if (vote === 'dislike') {
+                    voteBadge = '<span class="bg-rose-500 text-white px-3 py-1 rounded-full text-xs font-bold">👎 PASSED</span>';
+                }
+
+                const card = document.createElement('div');
+                card.className = "bg-teal-800/80 p-4 rounded-2xl border border-teal-600 space-y-2 shadow-sm";
+                card.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-lg text-teal-100">${categoryTitles[cat]}</h3>
+                        ${voteBadge}
+                    </div>
+                    <p class="text-sm text-teal-200">
+                        ${note ? `<strong>Note:</strong> "${note}"` : '<span class="italic opacity-70">No family note added yet.</span>'}
+                    </p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function switchTab(selectedTab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = "tab-btn bg-white text-slate-700 hover:bg-teal-50 px-5 py-3 rounded-2xl text-lg font-bold shadow-md transition transform active:scale-95";
+            });
+            const activeBtn = document.getElementById(`tab-${selectedTab}`);
+            if(activeBtn) {
+                activeBtn.className = "tab-btn bg-teal-700 text-white px-5 py-3 rounded-2xl text-lg font-bold shadow-md transition transform active:scale-95";
+            }
+
+            categories.forEach(cat => {
+                const sec = document.getElementById(`section-${cat}`);
+                if(sec) {
+                    if (selectedTab === 'all' || selectedTab === cat || (selectedTab === 'itineraries' && cat === 'itineraries')) {
+                        sec.classList.remove('hidden');
+                    } else {
+                        sec.classList.add('hidden');
+                    }
+                }
+            });
+
+            if(selectedTab === 'itineraries') {
+                ['wrightsville', 'carolina', 'myrtle'].forEach(c => {
+                    document.getElementById(`section-${c}`).classList.add('hidden');
+                });
+            } else if(selectedTab !== 'all') {
+                document.getElementById('section-itineraries').classList.add('hidden');
+            } else {
+                categories.forEach(c => {
+                    document.getElementById(`section-${c}`).classList.remove('hidden');
+                });
+            }
+        }
+
+        function shareLink() {
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    showCustomToast("Link copied to clipboard! Share it with the family.");
+                }).catch(() => {
+                    prompt("Copy this link to share with your family:", url);
+                });
+            } else {
+                prompt("Copy this link to share with your family:", url);
+            }
+        }
+
+        function showCustomToast(msg) {
+            const div = document.createElement('div');
+            div.className = "fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-teal-800 text-white font-bold px-6 py-3 rounded-2xl shadow-2xl z-50 transition border border-teal-600";
+            div.innerText = msg;
+            document.body.appendChild(div);
+            setTimeout(() => { div.remove(); }, 3500);
+        }
+
+        function confirmReset() {
+            if (confirm("Are you sure you want to clear all family votes and notes?")) {
+                appData = { votes: {}, notes: {} };
+                localStorage.removeItem('family_beach_trip_planner_v2');
+                updateUI();
+                showCustomToast("All choices have been reset.");
+            }
+        }
+
+        function playClickSound(freq) {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.value = freq;
+                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.15);
+            } catch (e) {
+                // Ignore audio restriction errors
+            }
+        }
+    </script>
+</body>
+</html>
